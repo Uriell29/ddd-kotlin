@@ -2,30 +2,52 @@ import domain.Cart
 import domain.Item
 import domain.Product
 
+
 fun main() {
 
-    val cart = Cart()
-    val applePencil = Item(Product("Apple Pencil"), 2)
-    cart.add(applePencil)
+    //codeProblem1to5();
 
-    val headphones = Item(Product("Sony Wireless headphone"))
-    cart.add(headphones)
-
-    cart.remove(applePencil)
-
-    println("Cart = $cart")
-    println("----------------------------------------")
-    println("items = ${cart.items}")
-    println("----------------------------------------")
-
-    println("Removed Products = ${cart.removedProducts}")
-
+    //Code Problem 6
     val cart1 = Cart()
     val cart2 = Cart()
-    val item1 = Item(Product("Sony Wireless headphone"))
-    val item2 = Item(Product("Sony Wireless headphone"))
-    cart1.add(item1)
-    cart2.add(item1)
-    println(cart1 == cart2)
-    println(cart1 == cart1)
+
+    val headphone1 = Product("Sony Wireless headphone")
+    val headphoneItem1 = Item(headphone1, 1)
+
+    val headphone2 = Product("Sony Wireless headphone")
+    val headphoneItem2 = Item(headphone2, 1)
+
+    cart1.add(headphoneItem1)
+    cart2.add(headphoneItem2)
+
+    println("----------------------------------------")
+    print("cart1.equals(cart2) :")
+    println(if (cart1 == cart2) "true=Carts are same " else "false=Carts are different")
+    println("----------------------------------------")
+    print("cart1.hasSameIdentityAs(cart2) :")
+    println(if (cart1.hasSameIdentityAs(cart2)) "true=Carts are same" else "false=Carts are different")
+    println("----------------------------------------")
+}
+
+private fun codeProblem1to5() {
+    val cart = Cart()
+    val headphone = Product("Sony Wireless headphone")
+    val headphoneItem = Item(headphone, 1)
+    cart.add(headphoneItem)
+    val applePencil = Product("Apple Pencil")
+    val applePencilItem = Item(applePencil, 2)
+    cart.add(applePencilItem)
+    println("Cart = $cart")
+    val items: List<Item> = cart.items
+    println("items = $items")
+    val applePencil1 = Product("Apple Pencil")
+    val applePencilItem1 = Item(applePencil1, 2)
+    cart.remove(applePencilItem1)
+    println("----------------------------------------")
+    println("After Removing Apple Pencil with 2 quantity")
+    println("Cart = $cart")
+    val items1: List<Item> = cart.items
+    println("items = $items1")
+    println("----------------------------------------")
+    println("Removed product names = " + cart.removedProducts)
 }
