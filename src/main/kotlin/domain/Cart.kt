@@ -1,12 +1,20 @@
 package domain
 
-class Cart(val products: MutableList<Product> = mutableListOf()) {
+class Cart(val items: MutableList<Item> = mutableListOf()) {
 
-    fun add(product: Product){
-        products.add(product)
+    val removedProducts: MutableSet<String> = mutableSetOf()
+    fun add(item: Item){
+        items.add(item)
+    }
+
+    fun remove(item: Item){
+        val removed = items.remove(item)
+        if (removed) {
+            removedProducts.add(item.product.name)
+        }
     }
 
     override fun toString(): String {
-        return "Cart{products='$products'}"
+        return "Cart{items='$items'}"
     }
 }
