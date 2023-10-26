@@ -4,7 +4,7 @@ import domain.events.DomainEvent
 import domain.events.ItemAddedToCartEvent
 import domain.events.ItemRemovedFromCartEvent
 
-class Cart(
+data class Cart(
     val cartId: CartId = CartId.generateCartId(),
     val events: MutableList<DomainEvent> = mutableListOf(),
     val items: MutableList<Item> = mutableListOf()
@@ -13,7 +13,7 @@ class Cart(
     val removedProducts: MutableSet<String> = mutableSetOf()
 
     fun add(item: Item) {
-        val itemAddedEvent = ItemAddedToCartEvent(item.product.name, item.quantity)
+        val itemAddedEvent = ItemAddedToCartEvent(item.product.name,item.quantity, item.product.price)
 
         apply(itemAddedEvent)
     }
@@ -25,7 +25,7 @@ class Cart(
 
     private fun apply(event: ItemAddedToCartEvent) {
         events.add(event)
-        items.add(Item(Product(event.productName), event.quantity))
+        items.add(Item(Product(event.productName,event.price), event.quantity))
     }
 
     private fun apply(event: ItemRemovedFromCartEvent) {
